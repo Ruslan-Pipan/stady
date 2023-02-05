@@ -1,16 +1,21 @@
 package com.study.study.mdl;
-
-import lombok.Builder;
+;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import java.util.Optional;
 
-@Builder(toBuilder = true)
+@Accessors(fluent = true)
+@Getter
+@Setter
 public class CompanyEntity {
-    public final String name;
-    public final boolean scheduled;
-    public final Integer delay;
-    public final String period;
-    public final String status;
+    private Integer id;
+    private String name;
+    private boolean scheduled;
+    private Integer delay;
+    private String period;
+    private String status;
 
-    public final Optional<EventType> eventType;
+    private Optional<EventType> eventType = Optional.empty();
 }

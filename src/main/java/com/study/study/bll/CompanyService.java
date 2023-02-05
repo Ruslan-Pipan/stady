@@ -1,19 +1,32 @@
 package com.study.study.bll;
 
-import com.study.study.dao.CompanyRepository;
+import com.study.study.dao.AbstractCrudRepository;
 import com.study.study.mdl.CompanyEntity;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 
 @Service
 @RequiredArgsConstructor
-public class CompanyService {
-    private final CompanyRepository companyRepository;
+@Slf4j
+public class CompanyService extends AbstractCrudService<CompanyEntity> {
+    private final AbstractCrudRepository<CompanyEntity> crudRepository;
 
-    public void createCompany(CompanyEntity companyEntity) {
-        companyRepository.insertCompany(companyEntity);
 
-        companyEntity.eventType.ifPresent(type -> type.event.process(companyEntity));
+    @Override
+    public AbstractCrudRepository<CompanyEntity> abstractCrudRepository() {
+        return crudRepository;
     }
+
+    @Override
+    public CompanyEntity create(CompanyEntity companyEntity) {
+        CompanyEntity createdCompany = crudRepository.create(companyEntity);
+
+        companyEntity.eventType().ifPresent(type -> type.event.process(companyEntity));
+
+        log.info("Company Service create.");
+        return createdCompany;
+    }
+
 }

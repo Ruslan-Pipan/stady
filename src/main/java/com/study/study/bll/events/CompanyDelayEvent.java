@@ -17,10 +17,10 @@ public class CompanyDelayEvent extends CompanyEvent {
     protected Optional<String> validation(CompanyEntity companyEntity) {
         StringBuilder errorBuilder = new StringBuilder();
 
-        if (Objects.isNull(companyEntity.delay)){
+        if (Objects.isNull(companyEntity.delay())){
             errorBuilder.append("The delay event must have 'delay' field ");
         }
-        if (Objects.equals(companyEntity.status, "DRAFT")){
+        if (Objects.equals(companyEntity.status(), "DRAFT")){
             errorBuilder.append("AND ");
             errorBuilder.append("status shouldn't be draft.");
         }
