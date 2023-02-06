@@ -1,5 +1,5 @@
 package com.study.study.mdl;
-;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -12,7 +12,7 @@ import java.util.Optional;
 public class CompanyEntity {
     private Integer id;
     private String name;
-    private boolean scheduled;
+    private Boolean scheduled;
     private Integer delay;
     private String period;
     private String status;
