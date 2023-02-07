@@ -1,6 +1,6 @@
 package com.study.study.query.filed;
 
-import com.study.study.query.BollenExpresion;
+import com.study.study.query.BollenExpression;
 import lombok.Getter;
 import lombok.experimental.Accessors;
 
@@ -8,17 +8,17 @@ import lombok.experimental.Accessors;
 @Accessors(fluent = true)
 @Getter
 public class NumberFiled extends QFiled<Number>{
-    public NumberFiled(String name) {
-        super(name);
+    public NumberFiled(String name, String tableName) {
+        super(name, tableName);
     }
 
     @Override
-    public BollenExpresion eq(Number number) {
-        return new BollenExpresion(name + "=" + number);
+    public BollenExpression eq(Number number) {
+        return new BollenExpression(tableName + "." + name + "=" + number);
     }
 
     @Override
-    public BollenExpresion and(Number number) {
+    public BollenExpression and(Number number) {
         return null;
     }
 }

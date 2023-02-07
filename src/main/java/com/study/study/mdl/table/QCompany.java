@@ -7,16 +7,17 @@ import com.study.study.query.QTable;
 import com.study.study.query.filed.StringFiled;
 
 public class QCompany extends QTable<CompanyEntity> {
+    private static final String tableName = "TCompany";
 
     public QCompany(){
-        super("TCompany");
+        super(tableName);
     }
 
-    public static final NumberFiled id = new NumberFiled("id");
-    public static final StringFiled name = new StringFiled("name");
-    public static final BooleanField scheduled = new BooleanField("scheduled");
-    public static final NumberFiled delay = new NumberFiled("delay");
-    public static final StringFiled period = new StringFiled("period");
-    public static final StringFiled status = new StringFiled("status");
+    public static final NumberFiled id = new NumberFiled("id", tableName);
+    public static final StringFiled name = new StringFiled("name", tableName);
+    public static final BooleanField scheduled = new BooleanField("scheduled", tableName);
+    public static final NumberFiled delay = new NumberFiled("delay", tableName);
+    public static final StringFiled period = new StringFiled("period", tableName);
+    public static final StringFiled status = new StringFiled("status", tableName);
 
 }

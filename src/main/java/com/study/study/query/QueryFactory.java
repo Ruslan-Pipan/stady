@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class QueryFactory {
@@ -14,9 +15,10 @@ public class QueryFactory {
     }
 
     public SelectQuery select(QFiled... qFields){
-        List<String> listFiled = Arrays.stream(qFields)
-                .map(q -> q.name).toList();
+        String conditional = Arrays.stream(qFields)
+                .map(q -> q.tableName + "." + q.name)
+                .collect(Collectors.joining(", "));
 
-        return new SelectQuery("SELECT " + String.join(", ", listFiled));
+        return new SelectQuery("SELECT " + conditional + " ");
     }
 }

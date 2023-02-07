@@ -1,22 +1,22 @@
 package com.study.study.query.filed;
 
-import com.study.study.query.BollenExpresion;
+import com.study.study.query.BollenExpression;
 import lombok.experimental.Accessors;
 
 @Accessors(fluent = true)
 public class BooleanField extends QFiled<Boolean>{
 
-    public BooleanField(String name) {
-        super(name);
+    public BooleanField(String name, String tableName) {
+        super(name, tableName);
     }
 
     @Override
-    public BollenExpresion eq(Boolean o) {
+    public BollenExpression eq(Boolean o) {
         return null;
     }
 
     @Override
-    public BollenExpresion and(Boolean aBoolean) {
+    public BollenExpression and(Boolean aBoolean) {
         return null;
     }
 }

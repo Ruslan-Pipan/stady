@@ -1,6 +1,8 @@
 package com.study.study.query;
 
 
+import com.study.study.query.filed.QFiled;
+
 public class SelectQuery {
     private StringBuilder query;
 
@@ -8,15 +10,32 @@ public class SelectQuery {
         this.query = new StringBuilder(query);
     }
 
-    public SelectQuery where(BollenExpresion bollenExpresion){
+    public SelectQuery where(BollenExpression bollenExpression){
         query.append("WHERE ")
-                .append(bollenExpresion.expresion());
+                .append(bollenExpression.expression())
+                .append(" ");
         return this;
     }
 
     public SelectQuery from(QTable qTable){
-        query.append(" FROM ")
+        query.append("FROM ")
                 .append(qTable.tableName)
+                .append(" ");
+        return this;
+    }
+
+    public SelectQuery innerJoin(QTable qTable){
+        query.append("INNER JOIN ")
+                .append(qTable.tableName)
+                .append(" ");
+        return this;
+    }
+
+    public SelectQuery on(QFiled from, QFiled to){
+        query.append("ON ")
+                .append(from.tableName).append(".").append(from.name)
+                .append(" = ")
+                .append(to.tableName).append(".").append(to.name)
                 .append(" ");
         return this;
     }

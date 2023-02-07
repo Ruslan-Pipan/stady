@@ -9,4 +9,5 @@ import lombok.experimental.Accessors;
 @Setter
 public class ServiceEntity {
     private Integer id;
+    private String serviceName;
 }

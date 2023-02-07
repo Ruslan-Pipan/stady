@@ -1,21 +1,21 @@
 package com.study.study.query.filed;
 
-import com.study.study.query.BollenExpresion;
+import com.study.study.query.BollenExpression;
 import lombok.experimental.Accessors;
 
 @Accessors(fluent = true)
 public class StringFiled extends QFiled<String>{
-    public StringFiled(String name) {
-        super(name);
+    public StringFiled(String name, String tableName) {
+        super(name, tableName);
     }
 
     @Override
-    public BollenExpresion eq(String s) {
+    public BollenExpression eq(String s) {
         return null;
     }
 
     @Override
-    public BollenExpresion and(String s) {
+    public BollenExpression and(String s) {
         return null;
     }
 }
