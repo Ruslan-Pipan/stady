@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/companies")
-public class CompanyController extends AbstractCrudController<CompanyEntity> implements CrudController<CompanyEntity>{
+public class DeprecatedCompanyController extends AbstractCrudController<CompanyEntity> implements CrudController<CompanyEntity>{
     private final AbstractCrudService<CompanyEntity> companyService;
 
     @Override
