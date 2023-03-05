@@ -1,6 +1,6 @@
-package com.study.study.api.hiber;
+package com.study.study.api;
 
-import com.study.study.bll.hiber.ICrudManager;
+import com.study.study.bll.ICrudManager;
 import com.study.study.mdl.hiber.TCompany;
 import com.study.study.mdl.hiber.TUser;
 import org.springframework.http.ResponseEntity;

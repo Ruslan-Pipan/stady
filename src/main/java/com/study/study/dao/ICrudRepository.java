@@ -1,4 +1,4 @@
-package com.study.study.dao.hiber;
+package com.study.study.dao;
 
 import java.util.Optional;
 

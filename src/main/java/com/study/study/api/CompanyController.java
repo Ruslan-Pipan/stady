@@ -1,7 +1,7 @@
-package com.study.study.api.hiber;
+package com.study.study.api;
 
-import com.study.study.bll.hiber.CrudManager;
-import com.study.study.bll.hiber.ICrudManager;
+import com.study.study.bll.CrudManager;
+import com.study.study.bll.ICrudManager;
 import com.study.study.mdl.hiber.TCompany;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

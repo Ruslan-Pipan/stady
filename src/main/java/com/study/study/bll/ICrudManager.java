@@ -1,4 +1,4 @@
-package com.study.study.bll.hiber;
+package com.study.study.bll;
 
 public interface ICrudManager<E> {
     E add(E eDto);

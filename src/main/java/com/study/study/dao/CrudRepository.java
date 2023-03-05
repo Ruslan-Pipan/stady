@@ -1,4 +1,4 @@
-package com.study.study.dao.hiber;
+package com.study.study.dao;
 
 import com.study.study.util.ReflectionHelper;
 import jakarta.persistence.EntityManager;
