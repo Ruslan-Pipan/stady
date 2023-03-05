@@ -21,12 +21,11 @@ public class TCompany {
     @OneToMany(mappedBy = "company", cascade = CascadeType.REMOVE)
     private List<TUser> users;
 
-    @JsonManagedReference
     public List<TUser> getUsers() {
         return users;
     }
 
-    public void setUsers(List<TUser> users) {
+    private void setUsers(List<TUser> users) {
         this.users = users;
     }
 

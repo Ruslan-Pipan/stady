@@ -25,6 +25,22 @@ public class ReflectionHelper {
                 .orElseThrow(RuntimeException::new);
     }
 
+    public static Method getMethod(Class<?> type, String filedName){
+        try {
+            return type.getDeclaredMethod("get" + filedName);
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Method setMethod(Class<?> type, String filedName, Class<?> typeParam){
+        try {
+            return type.getDeclaredMethod("set" + filedName, typeParam);
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static Method getMethod(Class<?> classes, Field field){
         try {
             return classes.getDeclaredMethod("get" + StringUtils.capitalize(field.getName()));
@@ -39,6 +55,11 @@ public class ReflectionHelper {
         } catch (NoSuchMethodException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static String formatTableClassName(Class<?> type){
+        String refClassName = type.getSimpleName();
+        return refClassName.substring(1);
     }
 
 }

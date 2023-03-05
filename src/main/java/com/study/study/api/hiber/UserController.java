@@ -18,7 +18,8 @@ public class UserController extends CrudController<TUser, Integer>{
 
     @PostMapping
     ResponseEntity<TUser> add(@RequestBody TUser userDto, @PathVariable Integer companyId){
-        return ResponseEntity.ok(crudManager.add(userDto.company(new TCompany().id(companyId))));
+        userDto = userDto.company(new TCompany().id(companyId));
+        return ResponseEntity.ok(crudManager.add(userDto, TCompany.class));
     }
 
     @PutMapping("/{id}")

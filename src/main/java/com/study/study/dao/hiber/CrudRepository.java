@@ -17,10 +17,17 @@ import java.util.Optional;
 public class CrudRepository<E> implements ICrudRepository<E> {
 
     protected final EntityManager entityManager;
+    private final PersistObjectWithReferences<E> persistObjectWithReferences;
 
     @Override
     public E add(E eDto) {
         entityManager.persist(eDto);
+        return eDto;
+    }
+
+    @Override
+    public E add(E eDto, Class<?>... referenceTypes) {
+        persistObjectWithReferences.persist(entityManager, eDto, referenceTypes);
         return eDto;
     }
 
@@ -37,7 +44,7 @@ public class CrudRepository<E> implements ICrudRepository<E> {
         try {
             primaryKey = getIdMethod.invoke(eDto);
         } catch (IllegalAccessException | InvocationTargetException e) {
-           throw new RuntimeException("The entity have to have get method for primary filed.");
+            throw new RuntimeException("The entity have to have get method for primary filed.");
         }
 
         return Optional.ofNullable((E) entityManager.find(eDto.getClass(), primaryKey));
