@@ -16,16 +16,17 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CrudRepository<E> implements ICrudRepository<E> {
 
-    private final EntityManager entityManager;
+    protected final EntityManager entityManager;
 
     @Override
-    public E save(E eDto) {
-        return entityManager.merge(eDto);
+    public E add(E eDto) {
+        entityManager.persist(eDto);
+        return eDto;
     }
 
     @Override
     public E update(E eDto) {
-        return save(eDto);
+        return entityManager.merge(eDto);
     }
 
     @Override

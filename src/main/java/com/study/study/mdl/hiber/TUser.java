@@ -1,6 +1,9 @@
 package com.study.study.mdl.hiber;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -19,6 +22,27 @@ public class TUser {
 
     private String lastName;
 
+    @Transient
+    @Setter(AccessLevel.NONE)
+    private Integer companyId;
+
+    @ManyToOne
+    @JoinColumn(name = "companyId", foreignKey = @ForeignKey(name = "FK_T_User_companyId_T_Company"))
+    private TCompany company;
+
+    @JsonBackReference
+    public TCompany getCompany() {
+        return company;
+    }
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private Integer getCompanyId() {
+        return company.getId();
+    }
+
+    public void setCompany(TCompany company) {
+        this.company = company;
+    }
     public Integer getId() {
         return id;
     }

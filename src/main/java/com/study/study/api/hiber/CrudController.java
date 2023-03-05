@@ -12,7 +12,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-
 public class CrudController<E, K> {
     private final ICrudManager<E> crudManager;
     private final Class<E> eClass;

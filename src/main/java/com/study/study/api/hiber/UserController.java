@@ -1,12 +1,13 @@
 package com.study.study.api.hiber;
 
 import com.study.study.bll.hiber.ICrudManager;
+import com.study.study.mdl.hiber.TCompany;
 import com.study.study.mdl.hiber.TUser;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/{companyId}/user")
 public class UserController extends CrudController<TUser, Integer>{
     private final ICrudManager<TUser> crudManager;
 
@@ -16,12 +17,12 @@ public class UserController extends CrudController<TUser, Integer>{
     }
 
     @PostMapping
-    ResponseEntity<TUser> add(@RequestBody TUser userDto){
-        return ResponseEntity.ok(crudManager.add(userDto));
+    ResponseEntity<TUser> add(@RequestBody TUser userDto, @PathVariable Integer companyId){
+        return ResponseEntity.ok(crudManager.add(userDto.company(new TCompany().id(companyId))));
     }
 
     @PutMapping("/{id}")
-    ResponseEntity<TUser> update(@PathVariable Integer id, @RequestBody TUser userDto){
+    ResponseEntity<TUser> update(@PathVariable Integer id, @RequestBody TUser userDto, @PathVariable String companyId){
         return ResponseEntity.ok(crudManager.update(userDto.id(id)));
     }
 }

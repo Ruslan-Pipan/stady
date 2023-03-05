@@ -11,7 +11,7 @@ public class CrudManager<E> implements ICrudManager<E>{
 
     @Override
     public E add(E eDto) {
-        return crudRepository.save(eDto);
+        return crudRepository.add(eDto);
     }
 
     @Override
