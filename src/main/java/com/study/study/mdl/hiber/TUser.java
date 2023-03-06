@@ -1,64 +1,44 @@
 package com.study.study.mdl.hiber;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.EqualsAndHashCode;
-import lombok.Setter;
-import lombok.experimental.Accessors;
+import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "T_User")
-@Accessors(fluent = true)
+@Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder(toBuilder = true)
 @EqualsAndHashCode
 public class TUser {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String firstName;
+    private String email;
 
-    private String lastName;
+    private String password;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "companyId", foreignKey = @ForeignKey(name = "FK_T_User_companyId_T_Company"))
     private TCompany company;
 
+    @MapsId
+    @OneToOne
+    private TPerson person;
+
     @JsonIgnore
-    public TCompany getCompany() {
-        return company;
-    }
+    @ManyToMany(mappedBy = "users")
+    private List<TRole> roles;
 
-    public void setCompany(TCompany company) {
-        this.company = company;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+    @JsonIgnore
+    @ManyToMany(mappedBy = "users")
+    private List<TService> services;
 
     @Transient
     @Setter(AccessLevel.NONE)

@@ -4,26 +4,23 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
-
 @Entity
-@Table(name = "T_Company")
-@Setter
+@Table(name = "T_Address")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class TCompany {
+public class TAddress {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String companyName;
+    private String countryCode;
 
-    @OneToMany(mappedBy = "company", cascade = CascadeType.REMOVE)
-    private List<TUser> users;
+    private String zipCode;
 
-
-    @OneToMany(mappedBy = "company")
-    private List<TService> services;
+    @JsonIgnore
+    @ManyToOne
+    private TPerson person;
 }

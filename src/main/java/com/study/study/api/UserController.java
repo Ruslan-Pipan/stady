@@ -18,12 +18,12 @@ public class UserController extends CrudController<TUser, Integer>{
 
     @PostMapping
     ResponseEntity<TUser> add(@RequestBody TUser userDto, @PathVariable Integer companyId){
-        userDto = userDto.company(new TCompany().id(companyId));
+        userDto = userDto.toBuilder().company(TCompany.builder().id(companyId).build()).build();
         return ResponseEntity.ok(crudManager.add(userDto, TCompany.class));
     }
 
     @PutMapping("/{id}")
     ResponseEntity<TUser> update(@PathVariable Integer id, @RequestBody TUser userDto, @PathVariable String companyId){
-        return ResponseEntity.ok(crudManager.update(userDto.id(id)));
+        return ResponseEntity.ok(crudManager.update(userDto.toBuilder().id(id).build()));
     }
 }

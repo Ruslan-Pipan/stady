@@ -7,23 +7,22 @@ import lombok.*;
 import java.util.List;
 
 @Entity
-@Table(name = "T_Company")
-@Setter
+@Table(name = "T_Role")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class TCompany {
+public class TRole {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String companyName;
+    private String roleName;
 
-    @OneToMany(mappedBy = "company", cascade = CascadeType.REMOVE)
+    @ManyToMany
+    @JoinTable(name = "T_RoleUser",
+            joinColumns = @JoinColumn(name = "roleId"),
+            inverseJoinColumns = @JoinColumn(name = "userId"))
     private List<TUser> users;
-
-
-    @OneToMany(mappedBy = "company")
-    private List<TService> services;
 }
