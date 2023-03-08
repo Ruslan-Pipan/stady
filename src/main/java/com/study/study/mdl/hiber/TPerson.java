@@ -26,6 +26,6 @@ public class TPerson {
     @OneToOne(mappedBy = "person")
     private TUser user;
 
-    @OneToMany(mappedBy = "person")
+    @OneToMany(mappedBy = "person", fetch = FetchType.EAGER)
     private List<TAddress> addresses;
 }

@@ -21,9 +21,10 @@ public class TService {
     private String serviceName;
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private TCompany company;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "T_ServiceUser",
             joinColumns = @JoinColumn(name = "serviceId"),

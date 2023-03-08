@@ -20,6 +20,7 @@ public class TRole {
 
     private String roleName;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "T_RoleUser",
             joinColumns = @JoinColumn(name = "roleId"),

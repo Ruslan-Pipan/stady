@@ -2,6 +2,8 @@ package com.study.study.api;
 
 import com.study.study.bll.ICrudManager;
 import com.study.study.util.ReflectionHelper;
+import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +14,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+@Log4j2
 public class CrudController<E, K> {
     private final ICrudManager<E> crudManager;
     private final Class<E> eClass;
@@ -33,8 +36,11 @@ public class CrudController<E, K> {
 
     @GetMapping("/{id}")
     public ResponseEntity<E> get(@PathVariable K id){
+        log.info("Start controller.");
         setPrimary(ReflectionHelper.setMethod(eClass, idField), id);
-        return ResponseEntity.ok(crudManager.get(eInstance));
+        E e = crudManager.get(eInstance);
+        log.info("Finished controller.");
+        return ResponseEntity.ok(e);
     }
 
     @DeleteMapping("/{id}")

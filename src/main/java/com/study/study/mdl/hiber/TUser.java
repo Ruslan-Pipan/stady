@@ -21,6 +21,7 @@ public class TUser {
 
     private String email;
 
+    @JsonIgnore
     private String password;
 
     @JsonIgnore
@@ -28,11 +29,11 @@ public class TUser {
     @JoinColumn(name = "companyId", foreignKey = @ForeignKey(name = "FK_T_User_companyId_T_Company"))
     private TCompany company;
 
+    @JsonIgnore
     @MapsId
     @OneToOne
     private TPerson person;
 
-    @JsonIgnore
     @ManyToMany(mappedBy = "users")
     private List<TRole> roles;
 

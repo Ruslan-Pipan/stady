@@ -4,6 +4,7 @@ import com.study.study.util.ReflectionHelper;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +15,7 @@ import java.util.Optional;
 @Repository
 @Transactional
 @RequiredArgsConstructor
+@Log4j2
 public class CrudRepository<E> implements ICrudRepository<E> {
 
     protected final EntityManager entityManager;
@@ -38,6 +40,7 @@ public class CrudRepository<E> implements ICrudRepository<E> {
 
     @Override
     public Optional<E> getByPrimaryKey(E eDto) {
+        log.info("Start repo.");
         Method getIdMethod = ReflectionHelper.getMethod(eDto.getClass(), ReflectionHelper.getIdField(eDto.getClass()));
 
         Object primaryKey;
@@ -46,7 +49,6 @@ public class CrudRepository<E> implements ICrudRepository<E> {
         } catch (IllegalAccessException | InvocationTargetException e) {
             throw new RuntimeException("The entity have to have get method for primary filed.");
         }
-
         return Optional.ofNullable((E) entityManager.find(eDto.getClass(), primaryKey));
     }
 

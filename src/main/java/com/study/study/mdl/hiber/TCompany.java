@@ -20,10 +20,11 @@ public class TCompany {
 
     private String companyName;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "company", cascade = CascadeType.REMOVE)
     private List<TUser> users;
 
-
+    @JsonIgnore
     @OneToMany(mappedBy = "company")
     private List<TService> services;
 }
